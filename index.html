@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro de Reparaciones</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 15px; padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #218838; }
+  </style>
+</head>
+<body>
+  <h1>Registro de Reparaciones</h1>
+  <form id="reparacionForm">
+    <label>Nombre del Cliente:
+      <input type="text" name="cliente" required>
+    </label>
+    <label>Dirección:
+      <input type="text" name="direccion" required>
+    </label>
+    <label>Fecha:
+      <input type="date" name="fecha" required>
+    </label>
+    <label>Tipo de equipo:
+      <input type="text" name="equipo">
+    </label>
+    <label>Falla encontrada:
+      <input type="text" name="falla">
+    </label>
+    <label>Trabajo realizado:
+      <textarea name="trabajo"></textarea>
+    </label>
+    <label>Gas cargado:
+      <input type="text" name="gas">
+    </label>
+    <label>Observaciones:
+      <textarea name="observaciones"></textarea>
+    </label>
+    <label>Costo:
+      <input type="number" name="costo" step="0.01">
+    </label>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <script>
+    document.getElementById("reparacionForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const datos = Object.fromEntries(new FormData(e.target));
+
+      fetch("https://script.google.com/macros/s/AKfycbyhqUZyKVB-ZDwmpUvBYIb2g8uplqVd-CQs0xBQMn4WvFfM4g4AgvFENrGLLrJj3WZkSw/exec", {
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("✅ Datos enviados correctamente.");
+          document.getElementById("reparacionForm").reset();
+        } else {
+          alert("❌ Error al enviar los datos.");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("❌ Error al conectar con la planilla.");
+      });
+    });
+  </script>
+</body>
+</html>
