@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -50,7 +49,8 @@
       e.preventDefault();
       const datos = Object.fromEntries(new FormData(e.target));
 
-      fetch("https://script.google.com/macros/s/AKfycbyhqUZyKVB-ZDwmpUvBYIb2g8uplqVd-CQs0xBQMn4WvFfM4g4AgvFENrGLLrJj3WZkSw/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbwnmq6m3xe9jf3cyKUsSb6StDsoyji5jIKcQckEx2J5GiJo8zYrh2z1Hn5amAWsQLSxxA/exec")
+
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
